@@ -1,6 +1,6 @@
 public class MoneyManager {
-    
-    static int num = 1; // 순서
+    //필드
+    static MoneyManager[] moneyManagers;
 
     int objNum;         // 일련번호
     boolean plusMinus;  // 수입, 지출(true 수입, false 지출)
@@ -9,11 +9,12 @@ public class MoneyManager {
     int amount;         // 금액
 
     public MoneyManager(String fileName, boolean pm, String date, String content, int amount) throws Exception {
-        this.objNum = ++num;
+        // 생성자
         FileManeger fm = new FileManeger(fileName);
         String str = fm.loadData();
         String[] subStr = str.split("\n");
         String[] subSubstr = subStr[subStr.length-1].split(",");
+
         this.objNum = Integer.valueOf(subSubstr[0]) + 1;
         this.plusMinus = pm;
         this.date = date;
@@ -21,6 +22,7 @@ public class MoneyManager {
         this.amount = amount;
     }
 
+    // 메서드
     public void save(String fileName) throws Exception{
         String data = this.toString();
         FileManeger fm = new FileManeger(fileName);
